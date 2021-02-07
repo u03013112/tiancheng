@@ -3,12 +3,14 @@ import tkinter as tk
 from cv2 import cv2
 from camera import Camera
 from PIL import Image, ImageDraw, ImageFont,ImageTk
+import pyperclip
 
 class Show():
     def __init__(self,root,title,url):
         self.windowW=360
         self.windowH=640
 
+        self.url=url
         # window = tk.Tk()
         if root != None:
             window = tk.Toplevel(root)
@@ -38,6 +40,10 @@ class Show():
             self.window.destroy()
 
         window.protocol("WM_DELETE_WINDOW", on_closing)
+        def didCopyBtnClicked():  
+            pyperclip.copy(self.url)
+        copyBtn = tk.Button(window,text='复制直播地址至粘贴板',command=didCopyBtnClicked)
+        copyBtn.place(x=5,y=2,width=200, height=23)
     def frame2Mtk(self,frame):
         w,h,_ = frame.shape
         # 直接拉伸

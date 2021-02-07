@@ -30,17 +30,17 @@ for col in columns:
     tree.heading(col,text=col,command=lambda col=col:treeview_sort_column(tree,col,False))             #行标题
     tree.column(col,width=80,anchor='w')   #每一行的宽度,'w'意思为靠右
 tree.column("title", width=100, anchor="center")
-tree.column("st", width=180, anchor="w")
-tree.column("type", width=20, anchor="center")
+tree.column("st", width=160, anchor="w")
+tree.column("type", width=40, anchor="center")
 tree.column("url",width=1000, anchor="center")
-tree.heading("title", text="title")
-tree.heading("st", text="st")
-tree.heading("type", text="type")
-tree.heading("url", text="url")
-tree.place(relx=0.004, rely=0.028, relwidth=0.964, relheight=0.95)
+tree.heading("title", text="标题")
+tree.heading("st", text="开播时间")
+tree.heading("type", text="类型")
+tree.heading("url", text="连接")
+tree.place(relx=0.004, rely=0.008, relwidth=0.964, relheight=0.98)
 
 ybar=tk.Scrollbar(infoFrame,orient='vertical',command=tree.yview)
-ybar.place(relx=0.971, rely=0.028, relwidth=0.024, relheight=0.958)
+ybar.place(relx=0.971, rely=0.008, relwidth=0.024, relheight=0.958)
 tree.configure(yscrollcommand=ybar.set)
 def onSelect(event):
     sels= event.widget.selection()#event.widget获取Treeview对象，调用selection获取选择对象名称
@@ -72,10 +72,14 @@ def didReflushBtnClicked():
         if len(title) == 0:
             title = '无名'
         t='免费'
-        if d['type'] != 0:
+        if d['type'] != '0':
             t='收费'
         tree.insert("",'end',values=[title,st,t,d['pull']])
+    countLabel.configure(text='共计：'+str(len(sp.data))+"个可观看直播")
 reflushBtn = tk.Button(barFrame,text='刷新',command=didReflushBtnClicked)
-reflushBtn.place(x=5,y=5,width=100, height=20)
+reflushBtn.place(x=5,y=2,width=100, height=26)
+
+countLabel = tk.Label(barFrame,text='<-请点击刷新')
+countLabel.place(x=110,y=5)
 
 win.mainloop()
