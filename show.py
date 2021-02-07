@@ -22,9 +22,10 @@ class Show():
         preview.place(x=0,y=0,width=self.windowW,height=self.windowH)
         self.preview = preview
         
-        dt = 15
-        # dt = 1000
+        # dt = 15
+        dt = 33
         def winUpdate():
+            # print(title,"update")
             self.window.after(dt,winUpdate)
             self.update()
         self.window.after(dt,winUpdate)
