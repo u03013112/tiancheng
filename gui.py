@@ -4,7 +4,10 @@ import tkinter as tk
 from tkinter import ttk
 from spider import Spider
 from show import Show
+import time
+
 win = tk.Tk()
+win.title('感谢甜橙')
 win['bg']='pink'
 
 
@@ -21,17 +24,17 @@ def treeview_sort_column(tv, col, reverse):
 infoFrame = tk.Frame(win,height=960,width=320,bg='#FFB6C1')
 infoFrame.pack()
     
-columns = [ "title", "hot", "type","url"]
+columns = [ "title", "st", "type","url"]
 tree = ttk.Treeview(infoFrame, columns=columns, show="headings")
 for col in columns:
     tree.heading(col,text=col,command=lambda col=col:treeview_sort_column(tree,col,False))             #行标题
     tree.column(col,width=80,anchor='w')   #每一行的宽度,'w'意思为靠右
 tree.column("title", width=100, anchor="center")
-tree.column("hot", width=100, anchor="w")
-tree.column("type", width=10, anchor="center")
+tree.column("st", width=180, anchor="w")
+tree.column("type", width=20, anchor="center")
 tree.column("url",width=1000, anchor="center")
 tree.heading("title", text="title")
-tree.heading("hot", text="hot")
+tree.heading("st", text="st")
 tree.heading("type", text="type")
 tree.heading("url", text="url")
 tree.place(relx=0.004, rely=0.028, relwidth=0.964, relheight=0.95)
@@ -64,8 +67,14 @@ def didReflushBtnClicked():
     for item in x:
         tree.delete(item)
     for d in sp.data:
-        # print(d['title'],d['votestotal'],d['type'],d['pull'])
-        tree.insert("",'end',values=[strFilter(d['title']),d['votestotal'],d['type'],d['pull']])
+        st = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(int(d['starttime'])))
+        title = strFilter(d['title'])
+        if len(title) == 0:
+            title = '无名'
+        t='免费'
+        if d['type'] != 0:
+            t='收费'
+        tree.insert("",'end',values=[title,st,t,d['pull']])
 reflushBtn = tk.Button(barFrame,text='刷新',command=didReflushBtnClicked)
 reflushBtn.place(x=5,y=5,width=100, height=20)
 
