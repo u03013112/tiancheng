@@ -13,6 +13,7 @@ if __name__=='__main__':
             data['title'] = d['title']
             # data['city'] = d['city']
             data['pull'] = d['pull']
+            print(d)
             ret.append(data)
             print(data,"\n\n")
     # print(ret)
