@@ -20,9 +20,19 @@ install:
   - pip install pyinstaller
 script:
   - pyinstaller -F gui.py
-  - cd dist
-  - git init
-  - git add -A
-  - git commit -m "CJH python exe Auto Builder"
-  #推送至指定仓库，建议使用国内仓库，下载速度快
-  - git push -f "https://${TOKEN_USER}:${TOKEN}@项目地址.git" master:master
+  - ls dist
+  # - cd dist
+  # - git init
+  # - git add -A
+  # - git commit -m "CJH python exe Auto Builder"
+  # #推送至指定仓库，建议使用国内仓库，下载速度快
+  # - git push -f "https://${TOKEN_USER}:${TOKEN}@项目地址.git" master:master
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file: "$TRAVIS_BUILD_DIR/dist/gui.exe"
+  api_key:
+    secure: "$API_KEY"
+  on:
+    tags: true #发布  tag版 时才进行发包   
+    draft: false # 不发表drafs

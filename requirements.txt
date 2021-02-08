@@ -1,4 +1,3 @@
-pythotk
 requests
 opencv-python
 pyperclip
