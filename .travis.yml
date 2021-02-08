@@ -14,7 +14,7 @@ install:
   - python -m pip install --upgrade pip
   - pip install --upgrade pip
   - export TZ='Asia/Shanghai'
-  - git config --global user.name ${USERNAME}
+  - git config --global user.name ${GITHUBUSERNAME}
   - git config --global user.email ${EMAIL}
   - pip install -r requirements.txt
   - pip install pyinstaller
