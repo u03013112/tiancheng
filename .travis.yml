@@ -31,8 +31,8 @@ deploy:
   provider: releases
   skip_cleanup: true
   file: "$TRAVIS_BUILD_DIR/dist/gui.exe"
-  # api_key:
-  user: ${GITHUBUSERNAME}
-  password: ${GITHUBPASSWORD}
+  api_key: ${GITHUB_TOKEN}
+  # user: ${GITHUBUSERNAME}
+  # password: ${GITHUBPASSWORD}
   on:
     tags: true #发布  tag版 时才进行发包
