@@ -1,0 +1,5 @@
+pythotk
+requests
+opencv-python
+pyperclip
+Pillow
