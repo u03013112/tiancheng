@@ -26,6 +26,3 @@ script:
   - git commit -m "CJH python exe Auto Builder"
   #推送至指定仓库，建议使用国内仓库，下载速度快
   - git push -f "https://${TOKEN_USER}:${TOKEN}@项目地址.git" master:master
-branches:
-  only:
-    - master
