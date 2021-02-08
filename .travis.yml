@@ -31,8 +31,6 @@ deploy:
   provider: releases
   skip_cleanup: true
   file: "$TRAVIS_BUILD_DIR/dist/gui.exe"
-  api_key:
-    secure: "$API_KEY"
+  api_key: "$API_KEY"
   on:
-    tags: true #发布  tag版 时才进行发包   
-    draft: false # 不发表drafs
+    tags: true #发布  tag版 时才进行发包
