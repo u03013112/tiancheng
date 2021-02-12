@@ -8,16 +8,19 @@ before_install:
   - scoop help
   - scoop install python
   - python -V
+  - scoop install curl
+  - scoop install tar
 
 env: PATH=/c/Users/travis/scoop/apps/python/current:/c/Users/travis/scoop/apps/python/current/Scripts:/c/Users/travis/scoop/apps/python/current/Tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
 install:
   - python -m pip install --upgrade pip
   - pip install --upgrade pip
   - export TZ='Asia/Shanghai'
-  # - git config --global user.name ${GITHUBUSERNAME}
-  # - git config --global user.email ${EMAIL}
   - pip install -r requirements.txt
   - pip install pyinstaller
+  - curl https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2021-02-12-12-32/ffmpeg-N-101068-gedc45d1bd5-win64-gpl.zip -o ffmpeg.zip
+  - tar -xf ffmpeg.zip
+  - ls *
 script:
   - pyinstaller -F gui.py
   - ls dist
