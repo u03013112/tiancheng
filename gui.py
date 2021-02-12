@@ -5,6 +5,8 @@ from tkinter import ttk
 from spider import Spider
 from show import Show
 import time
+import os
+import platform
 
 win = tk.Tk()
 win.title('感谢甜橙')
@@ -46,9 +48,23 @@ def onSelect(event):
     sels= event.widget.selection()#event.widget获取Treeview对象，调用selection获取选择对象名称
     for idx in sels:
         values = tree.item(idx)['values']
-        show = Show(win,values[0],values[3])
-        show.show()
-
+        url = values[3]
+        if len(url)<7:
+            return
+        if url[0:7] == 'rtsp://' or url[0:7] =='rtmp://' :
+            sysstr = platform.system()
+            cmd = 'ffplay'
+            if sysstr == 'Windows':
+                cmd += '.exe'
+            cmd += ' -x 360 -y 640'
+            cmd += ' -window_title "' + values[0] +'"'
+            cmd += ' "' + values[3] +' live=1" &'
+            print(cmd)
+            os.system(cmd)
+        else :
+            show = Show(win,values[0],values[3])
+            show.show()
+        
 tree.bind("<<TreeviewSelect>>", onSelect)
 sp = Spider()
 
