@@ -1,13 +1,22 @@
-# -*- mode: python -*-
+# -*- mode: python ; coding: utf-8 -*-
+
+import ffpyplayer
 
 block_cipher = None
 
 
 a = Analysis(['gui.py'],
-             pathex=['/Users/u03013112/Documents/leeknet/DispatcherPlatform/git/tiancheng'],
+             pathex=['D:\\Jing\\python\\tiancheng'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=['ffpyplayer.pic',
+                'ffpyplayer.tools',
+                'ffpyplayer.threading',
+                'ffpyplayer.player.queue',
+                'ffpyplayer.player.frame_queue',
+                'ffpyplayer.player.decoder',
+                'ffpyplayer.player.clock',
+                'ffpyplayer.player.core',],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -28,5 +37,6 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
+          upx_exclude=[],
           runtime_tmpdir=None,
           console=True )
