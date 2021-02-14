@@ -19,12 +19,6 @@ install:
 script:
   - pyinstaller -F gui.py --hidden-import ffpyplayer.threading  --hidden-import ffpyplayer.player.queue --hidden-import ffpyplayer.player.frame_queue --hidden-import ffpyplayer.player.decoder --hidden-import ffpyplayer.player.clock --hidden-import ffpyplayer.player.core
   - ls dist
-  # - cd dist
-  # - git init
-  # - git add -A
-  # - git commit -m "CJH python exe Auto Builder"
-  # #推送至指定仓库，建议使用国内仓库，下载速度快
-  # - git push -f "https://${TOKEN_USER}:${TOKEN}@项目地址.git" master:master
 deploy:
   provider: releases
   skip_cleanup: true
