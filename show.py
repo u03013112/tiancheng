@@ -1,7 +1,8 @@
 #!/usr/bin/python3 
 import tkinter as tk
 from cv2 import cv2
-from camera import Camera
+# from camera import Camera
+from ffplayer import Camera
 from PIL import Image, ImageDraw, ImageFont,ImageTk
 import pyperclip
 
@@ -9,6 +10,8 @@ class Show():
     def __init__(self,root,title,url):
         self.windowW=360
         self.windowH=640
+
+        self.isMute = False
 
         self.url=url
         # window = tk.Tk()
@@ -44,6 +47,21 @@ class Show():
             pyperclip.copy(self.url)
         copyBtn = tk.Button(window,text='复制直播地址至粘贴板',command=didCopyBtnClicked)
         copyBtn.place(x=5,y=2,width=200, height=23)
+
+        def didMuteBtnClicked():
+            if self.isMute == True:
+                self.isMute = False
+                self.camera.player.set_volume(1.0)
+                self.muteBtn.configure(text='静音')
+            else:
+                self.isMute = True
+                self.camera.player.set_volume(0.0)
+                self.muteBtn.configure(text='开音')
+        muteBtn = tk.Button(window,text='静音',command=didMuteBtnClicked)
+        muteBtn.place(x=300,y=2,width=50, height=23)
+        self.muteBtn = muteBtn
+
+
     def frame2Mtk(self,frame):
         w,h,_ = frame.shape
         # 直接拉伸
@@ -55,13 +73,11 @@ class Show():
         imgtk = ImageTk.PhotoImage(image=im)
         return imgtk
     def setPreview(self,frame):
-        imgtk = self.frame2Mtk(frame)
-        self.preview.configure(image=imgtk)
-        self.preview.image = imgtk # keep a reference!
+        self.preview.configure(image=frame)
+        self.preview.image = frame
     def update(self):
         if self.camera.ready != 0:
             self.setPreview(self.camera.frame)
-        
     def show(self):
         self.window.mainloop()
 

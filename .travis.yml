@@ -16,9 +16,6 @@ install:
   - export TZ='Asia/Shanghai'
   - pip install -r requirements.txt
   - pip install pyinstaller
-  - wget https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2021-02-12-12-32/ffmpeg-N-101068-gedc45d1bd5-win64-gpl.zip -O /tmp/ffmpeg.zip
-  - unzip /tmp/ffmpeg.zip -d /tmp
-  - cp /tmp/ffmpeg-N-101068-gedc45d1bd5-win64-gpl/bin/ffplay.exe ./
 script:
   - pyinstaller -F gui.py
   - ls dist

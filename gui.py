@@ -49,21 +49,23 @@ def onSelect(event):
     for idx in sels:
         values = tree.item(idx)['values']
         url = values[3]
-        if len(url)<7:
-            return
-        if url[0:7] == 'rtsp://' or url[0:7] =='rtmp://' :
-            sysstr = platform.system()
-            cmd = 'ffplay'
-            if sysstr == 'Windows':
-                cmd += '.exe'
-            cmd += ' -x 360 -y 640'
-            cmd += ' -window_title "' + values[0] +'"'
-            cmd += ' "' + values[3] +' live=1" &'
-            print(cmd)
-            os.system(cmd)
-        else :
-            show = Show(win,values[0],values[3])
-            show.show()
+        # if len(url)<7:
+        #     return
+        # if url[0:7] == 'rtsp://' or url[0:7] =='rtmp://' :
+        #     sysstr = platform.system()
+        #     cmd = 'ffplay'
+        #     if sysstr == 'Windows':
+        #         cmd += '.exe'
+        #     cmd += ' -x 360 -y 640'
+        #     cmd += ' -window_title "' + values[0] +'"'
+        #     cmd += ' "' + values[3] +' live=1" &'
+        #     print(cmd)
+        #     # os.system(cmd)
+        # else :
+            # show = Show(win,values[0],values[3])
+            # show.show()
+        show = Show(win,values[0],values[3])
+        show.show()
         
 tree.bind("<<TreeviewSelect>>", onSelect)
 sp = Spider()
