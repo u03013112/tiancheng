@@ -17,7 +17,7 @@ install:
   - pip install -r requirements.txt
   - pip install pyinstaller
 script:
-  - pyinstaller -F gui.py
+  - pyinstaller -F gui.py --hidden-import ffpyplayer.threading  --hidden-import ffpyplayer.player.queue --hidden-import ffpyplayer.player.frame_queue --hidden-import ffpyplayer.player.decoder --hidden-import ffpyplayer.player.clock --hidden-import ffpyplayer.player.core
   - ls dist
   # - cd dist
   # - git init
