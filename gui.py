@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*- 
-
 import tkinter as tk
 from tkinter import ttk
 from spider import Spider
 from show import Show
 import time
-import os
-import platform
 
 win = tk.Tk()
 win.title('感谢甜橙')
@@ -92,12 +88,16 @@ def didReflushBtnClicked():
         t='免费'
         if d['type'] != '0':
             t='收费'
-        tree.insert("",'end',values=[title,st,t,d['pull']])
+        tree.insert("",'end',values=[title,st,t,d['pull']],tags = (t,))
+    tree.tag_configure('免费', background='white')
+    tree.tag_configure('收费', background='pink')
     countLabel.configure(text='共计：'+str(len(sp.data))+"个可观看直播")
+    treeview_sort_column(tree,'st',True)
 reflushBtn = tk.Button(barFrame,text='刷新',command=didReflushBtnClicked)
 reflushBtn.place(x=5,y=2,width=100, height=26)
 
 countLabel = tk.Label(barFrame,text='<-请点击刷新')
 countLabel.place(x=110,y=5)
 
+didReflushBtnClicked()
 win.mainloop()
